@@ -1,0 +1,13 @@
+{
+  "name": "todos_test_backend",
+  "version": "1.0.0",
+  "description": "todos_test_backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node dist/server.js"
+    },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
