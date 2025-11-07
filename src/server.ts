@@ -1,6 +1,7 @@
 import express, { Request, Response, NextFunction, Application } from 'express';
 import cors from 'cors';
 import logger from 'morgan';
+import uri from './service/servise';
 import mongoose from 'mongoose';
 
 import apiRouter from './api/routerApi';
@@ -43,6 +44,22 @@ data: 'Internal Server Error',
 });
 
 // Запускаем сервер
-app.listen(port, () => {
-  console.log(`Сервер запущен на http://localhost:${port}`);
-});
+
+//     console.log(`Сервер запущен на http://localhost:${port}`);})
+// try {
+//     connect();
+//     app.listen(port, () => {
+//     console.log(`Сервер запущен на http://localhost:${port}`);});
+// } catch (error) {
+//     console.log(error);
+// };
+
+mongoose
+  .connect(uri)
+  .then(() => {
+    app.listen(port);
+    console.log("Database connection successful");
+  })
+  .catch((error) => {
+    console.log(error);
+  });
