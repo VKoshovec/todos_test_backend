@@ -1,6 +1,7 @@
 import  { Router, Request, Response } from "express";
 const router = Router();
 import boardsControllers from '../controllers/boards';
+import taskControllers from '../controllers/tasks'
  
 router.get('/', (req: Request, res: Response) => {
    res.send('test msg api - ok');
@@ -11,15 +12,10 @@ router.get('/boards', boardsControllers.getAllBoards);
 
 router.post('/board', boardsControllers.createBoard);
 
+router.delete('board/:boardId', boardsControllers.delBoard)
+
 //tasks 
-router.get('/tasks:boardid', (req: Request, res: Response) => {
-   const { boardid: number } = req.params;
-   res.status(200).json({
-    status: 'success',
-    code: 200,
-    data: {},
-})
-});
+router.get('/tasks/:board_id', taskControllers.getAllTasks);
 
 
 export default router;

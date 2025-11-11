@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import BoardModel from "../models/boards/schema";
-import { now } from "mongoose";
+
 
 async function getAllBoards ( req: Request, res: Response) { 
 
@@ -9,19 +9,27 @@ async function getAllBoards ( req: Request, res: Response) {
 };
 
 async function createBoard ( req: Request, res: Response) { 
-
-    //   const { name } = req.params;
-    //   const defaultName:string = "";
-
-    //   if (!name) {
-    //     const defaultName = "Board " + Date.now();
-
-    //   } else {
-    //     const defaultName = name;
-    //   }
-
-      const result = await BoardModel.create({ ...req.body });
-      res.json(result);
+      
+    const result = await BoardModel.create({ ...req.body });
+    res.json(result);
+      
 };
 
-export default { getAllBoards, createBoard };
+async function delBoard ( req: Request, res: Response) { 
+      
+    const { boardId } = req.params;
+
+    const result = await BoardModel.findByIdAndDelete(boardId);
+
+    if(!result) { 
+        res.status(404);
+    } 
+    else {
+        res.status(200).json({
+        "message": "contact deleted"
+        });
+    };
+      
+};
+
+export default { getAllBoards, createBoard, delBoard };
