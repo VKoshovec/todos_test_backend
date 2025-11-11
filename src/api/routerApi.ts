@@ -1,33 +1,17 @@
-import express, { Router, Request, Response, Application } from "express";
-import { getAllBoards } from "../controllers/boards"
+import  { Router, Request, Response } from "express";
 const router = Router();
-const app: Application = express();
-
+import boardsControllers from '../controllers/boards';
+ 
 router.get('/', (req: Request, res: Response) => {
    res.send('test msg api - ok');
 });
 
 //boards
-router.get('/boards', (req: Request, res: Response) => {
+router.get('/boards', boardsControllers.getAllBoards);
 
-    const boardList = async() => await getAllBoards();
+router.post('/board', boardsControllers.createBoard);
 
-    res.status(200).json({
-    status: 'success',
-    code: 200,
-    data: {...boardList},
-})
-});
-
-router.get('/board:id', (req: Request, res: Response) => {
-   const { id: number } = req.params;
-   res.status(200).json({
-    status: 'success',
-    code: 200,
-    data: {},
-})
-});
-
+//tasks 
 router.get('/tasks:boardid', (req: Request, res: Response) => {
    const { boardid: number } = req.params;
    res.status(200).json({

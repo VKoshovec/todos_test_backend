@@ -1,12 +1,12 @@
 import { Schema, model } from "mongoose";
 
-const board = new Schema({
-    title: {
-			type: String,
-			required: [true, "Set title"],
-		},
+const boardShema = new Schema({
+      name: {
+          type: String,
+          required: [true, 'Set name for board'],
+      },
 });
 
-const BoardModel = model ("board", board);
+const BoardModel = model ("board", boardShema);
 
 export default BoardModel;

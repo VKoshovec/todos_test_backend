@@ -29,10 +29,11 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 res.status(404).json({
 status: 'error',
 code: 404,
-message: 'Use api on routes: /api/tasks',
+message: 'Use api on routes: /api/boards',
 data: 'Not found',
 });
 });
+
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 console.log(err.stack);
 res.status(500).json({
@@ -43,16 +44,6 @@ data: 'Internal Server Error',
 });
 });
 
-// Запускаем сервер
-
-//     console.log(`Сервер запущен на http://localhost:${port}`);})
-// try {
-//     connect();
-//     app.listen(port, () => {
-//     console.log(`Сервер запущен на http://localhost:${port}`);});
-// } catch (error) {
-//     console.log(error);
-// };
 
 mongoose
   .connect(uri)
