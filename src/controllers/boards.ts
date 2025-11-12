@@ -32,4 +32,23 @@ async function delBoard ( req: Request, res: Response) {
       
 };
 
-export default { getAllBoards, createBoard, delBoard };
+async function updBoard ( req: Request, res: Response) { 
+      
+    const { boardId } = req.params;
+
+    const { name } = req.body;
+
+    const result = await BoardModel.findByIdAndUpdate(boardId, { name });
+
+    if(!result) { 
+        res.status(404);
+    } 
+    else {
+        res.status(200).json({
+        "message": "contact deleted"
+        });
+    };
+      
+};
+
+export default { getAllBoards, createBoard, delBoard, updBoard };
