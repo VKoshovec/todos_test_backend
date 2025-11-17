@@ -13,10 +13,9 @@ async function getAllTasks ( req: Request, res: Response) {
 async function createTask ( req: Request, res: Response) { 
 
     const board_Id = req.params;
-    const status = "1";
-    const { name } = req.body; 
+    const { name, desc, status } = req.body; 
 
-    const result = await TaskModel.create({ board_Id, name, status });
+    const result = await TaskModel.create({ board_Id, name, status, desc });
     res.json(result);
 
 };
@@ -42,9 +41,9 @@ async function updTask ( req: Request, res: Response) {
 
     const taskId = req.params; 
 
-    const { status } = req.body;
+    const { name, status, desc } = req.body;
 
-    const result = await TaskModel.findByIdAndUpdate(taskId, { status });
+    const result = await TaskModel.findByIdAndUpdate(taskId, { name, status, desc });
     if(!result) { 
         res.status(404);
     } 

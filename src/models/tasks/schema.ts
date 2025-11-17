@@ -9,6 +9,10 @@ const taskShema = new Schema({
         type: String,
         required: [true, 'Set name for task'],
       },
+      desc: {
+        type: String,
+        required: [false, 'Set deskription for task'],
+      },
       status: {
         type: String,
         required: [true, 'Set status for task'],
